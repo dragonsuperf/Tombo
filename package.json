@@ -1,0 +1,80 @@
+{
+  "name": "tombo",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "./*",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "iohook": "^0.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "react-spring": "^8.0.27",
+    "web-vitals": "^1.0.1"
+  },
+  "iohook": {
+    "targets": [
+      "node-88",
+      "electron-85"
+    ],
+    "platforms": [
+      "win32"
+    ],
+    "arches": [
+      "x64"
+    ]
+  },
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "react-start": "rescripts start",
+    "build": "rescripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "start": "nf start",
+    "dist": "electron-builder build -w"
+  },
+  "build": {
+    "asar": true,
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "build/"
+    },
+    "target": "zip"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.16",
+    "@rescripts/rescript-env": "^0.0.14",
+    "electron": "^11.0.0",
+    "electron-builder": "^22.10.5",
+    "foreman": "^3.0.1"
+  },
+  "author": {
+    "name": "dsf",
+    "email": "dragonsuperf@gmail.com",
+    "url": "https://github.com/dragonsuperf"
+  }
+}
