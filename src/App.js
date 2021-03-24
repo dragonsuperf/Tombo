@@ -14,8 +14,10 @@ const exclamTexts = [
   'Nice Job!',
   'Goob Job!',
   'Cool!',
-  'Keep Going!'
-]
+  'Keep Going!',
+  'Fantastic!',
+  'Good!'
+];
 
 const slideToUnder = keyframes`
   0% {
@@ -110,7 +112,7 @@ function App() {
   }, [currentCombo])
 
   useEffect(() => {
-    let interval = setInterval(() => setComboTime(comboTime => comboTime + 1), 1000);
+    const interval = setInterval(() => setComboTime(comboTime => comboTime + 1), 1000);
 
     window.ipcRenderer.on('key-down', (event) => {
       setComboTime(0);
