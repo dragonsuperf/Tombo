@@ -114,7 +114,13 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => setComboTime(comboTime => comboTime + 1), 1000);
 
-    window.ipcRenderer.on('key-down', (event) => {
+    window.ipcRenderer.on('key-down', (event, key) => {
+      const { altKey, ctrlKey, metaKey, shiftKey } = key.key;
+      console.log(event.keycode);
+      console.log(key.key);
+      console.log(ctrlKey);
+      if (altKey || ctrlKey || metaKey || shiftKey) return;
+      console.log(key);
       setComboTime(0);
       addCombo();
     });

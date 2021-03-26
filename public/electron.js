@@ -13,8 +13,8 @@ function createWindow(){
    mainWindow = new BrowserWindow({
     width: 300,
     height: 100,
-    frame: false,
-    resizable: false,
+    frame: isDev,
+    resizable: isDev,
     webPreferences: {
       nodeIntegration: false,
       preload: __dirname + '/preload.js',
