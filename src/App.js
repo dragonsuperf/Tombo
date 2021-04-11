@@ -73,6 +73,14 @@ const ComboHolder = styled.div`
   color: ${(props) => props.color};
 `;
 
+const MaxComboHolder = styled.div`
+  position: fixed;
+  color: white;
+  bottom: 5px;
+  left: 13px;
+  font-size: 10px;
+`;
+
 const COMBO_TIMER = 10;
 
 function App() {
@@ -81,6 +89,7 @@ function App() {
   const [colorIndex, setColorIndex] = useState(0);
   const [showExcalm, setShowExcalm] = useState(false);
   const [exclamIndex, setExclamIndex] = useState(0);
+  const [maxCombo, setMaxCombo] = useState(0);
   const [props, set] = useSpring(() => ({fontSize: '1em'}));
 
   const addCombo = () => {
@@ -90,6 +99,7 @@ function App() {
   }
 
   const resetCombo = () => {
+    if( currentCombo > maxCombo ) setMaxCombo(currentCombo);
     setCurrentCombo(0);
     setShowExcalm(false);
   }
@@ -116,11 +126,7 @@ function App() {
 
     window.ipcRenderer.on('key-down', (event, key) => {
       const { altKey, ctrlKey, metaKey, shiftKey } = key.key;
-      console.log(event.keycode);
-      console.log(key.key);
-      console.log(ctrlKey);
       if (altKey || ctrlKey || metaKey || shiftKey) return;
-      console.log(key);
       setComboTime(0);
       addCombo();
     });
@@ -145,6 +151,7 @@ function App() {
             {currentCombo}
           </animated.div>
         </ComboHolder>
+        {maxCombo > 0 && <MaxComboHolder>Max Tombo: {maxCombo}</MaxComboHolder>}
       </ComboContainer>
     </Wrapper>
   );
