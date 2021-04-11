@@ -14,8 +14,10 @@ const exclamTexts = [
   'Nice Job!',
   'Goob Job!',
   'Cool!',
-  'Keep Going!'
-]
+  'Keep Going!',
+  'Fantastic!',
+  'Good!'
+];
 
 const slideToUnder = keyframes`
   0% {
@@ -71,6 +73,14 @@ const ComboHolder = styled.div`
   color: ${(props) => props.color};
 `;
 
+const MaxComboHolder = styled.div`
+  position: fixed;
+  color: white;
+  bottom: 5px;
+  left: 13px;
+  font-size: 10px;
+`;
+
 const COMBO_TIMER = 10;
 
 function App() {
@@ -79,6 +89,7 @@ function App() {
   const [colorIndex, setColorIndex] = useState(0);
   const [showExcalm, setShowExcalm] = useState(false);
   const [exclamIndex, setExclamIndex] = useState(0);
+  const [maxCombo, setMaxCombo] = useState(0);
   const [props, set] = useSpring(() => ({fontSize: '1em'}));
 
   const addCombo = () => {
@@ -88,6 +99,7 @@ function App() {
   }
 
   const resetCombo = () => {
+    if( currentCombo > maxCombo ) setMaxCombo(currentCombo);
     setCurrentCombo(0);
     setShowExcalm(false);
   }
@@ -110,9 +122,11 @@ function App() {
   }, [currentCombo])
 
   useEffect(() => {
-    let interval = setInterval(() => setComboTime(comboTime => comboTime + 1), 1000);
+    const interval = setInterval(() => setComboTime(comboTime => comboTime + 1), 1000);
 
-    window.ipcRenderer.on('key-down', (event) => {
+    window.ipcRenderer.on('key-down', (event, key) => {
+      const { altKey, ctrlKey, metaKey, shiftKey } = key.key;
+      if (altKey || ctrlKey || metaKey || shiftKey) return;
       setComboTime(0);
       addCombo();
     });
@@ -137,6 +151,7 @@ function App() {
             {currentCombo}
           </animated.div>
         </ComboHolder>
+        {maxCombo > 0 && <MaxComboHolder>Max Tombo: {maxCombo}</MaxComboHolder>}
       </ComboContainer>
     </Wrapper>
   );
