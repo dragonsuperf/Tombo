@@ -12,7 +12,7 @@ function createWindow(){
   
    mainWindow = new BrowserWindow({
     width: isDev ? 800 : 300,
-    height: isDev ? 600 : 100,
+    height: isDev ? 600 : 125,
     frame: isDev,
     resizable: isDev,
     webPreferences: {
