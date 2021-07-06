@@ -6,3 +6,6 @@ This is simple combo checker. Tombo will save you the boredom of writing documen
 
 I really liked activate-power-mode of atom editor, but vscode did not provide combo checker of activate-power-mode, so I developed Tombo.  
 The original repository is here. https://github.com/JoelBesada/activate-power-mode
+
+## 1.0.2
+- now support mac os
