@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
 
+const { ipcRenderer } = window.require('electron');
+
 const comboColors = ['#4effa1', '#87CEFA', '#dc143c', '#ffdf00'];
+
 const exclamTexts = [
   'Great!',
   'Impressive!',
@@ -12,7 +15,7 @@ const exclamTexts = [
   'God Like!',
   'Wow!',
   'Nice Job!',
-  'Goob Job!',
+  'Good Job!',
   'Cool!',
   'Keep Going!',
   'Fantastic!',
@@ -124,7 +127,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => setComboTime(comboTime => comboTime + 1), 1000);
 
-    window.ipcRenderer.on('key-down', (event, key) => {
+    ipcRenderer.on('key-down', (event, key) => {
       const { altKey, ctrlKey, metaKey, shiftKey } = key.key;
       if (altKey || ctrlKey || metaKey || shiftKey) return;
       setComboTime(0);

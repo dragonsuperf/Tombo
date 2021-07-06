@@ -11,13 +11,13 @@ function createWindow(){
   const { width } = electron.screen.getPrimaryDisplay().workAreaSize;
   
    mainWindow = new BrowserWindow({
-    width: 300,
-    height: 100,
+    width: isDev ? 800 : 300,
+    height: isDev ? 600 : 100,
     frame: isDev,
     resizable: isDev,
     webPreferences: {
-      nodeIntegration: false,
-      preload: __dirname + '/preload.js',
+      nodeIntegration: true,
+      enableRemoteModule: true,
     }
   });
 
@@ -25,8 +25,9 @@ function createWindow(){
   mainWindow.setAlwaysOnTop(true);
 
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file:${path.join(__dirname, '../build/index.html')}`);
+  
   if(isDev){
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
   mainWindow.on('closed', ()=>mainWindow = null);
    

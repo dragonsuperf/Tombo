@@ -2,13 +2,12 @@
   "name": "tombo",
   "version": "1.0.1",
   "private": true,
-  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "electron-is-dev": "^2.0.0",
-    "iohook": "^0.7.2",
+    "iohook": "^0.9.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -19,17 +18,19 @@
   },
   "iohook": {
     "targets": [
-      "node-88",
-      "electron-85"
+      "node-83",
+      "electron-82"
     ],
     "platforms": [
-      "win32"
+      "win32",
+      "darwin"
     ],
     "arches": [
       "x64"
     ]
   },
   "main": "public/electron.js",
+  "homepage": "./",
   "scripts": {
     "start": "rescripts start",
     "build": "rescripts build",
@@ -39,10 +40,14 @@
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder build -w",
-    "dist": "electron-builder build -w"
+    "electron-pack": "electron-builder build -wm",
+    "dist": "electron-builder build -wm"
   },
   "build": {
+    "appId": "com.tombo.app",
+    "mac": {
+      "category": "com.tombo.app"
+    },
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -74,9 +79,8 @@
     "@rescripts/cli": "^0.0.16",
     "@rescripts/rescript-env": "^0.0.14",
     "concurrently": "^6.0.0",
-    "electron": "^11.0.0",
+    "electron": "^10.4.7",
     "electron-builder": "^22.10.5",
-    "foreman": "^3.0.1",
     "wait-on": "^5.3.0"
   },
   "author": {
